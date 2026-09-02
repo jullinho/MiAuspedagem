@@ -1,4 +1,4 @@
-# MiAuspedagem — reservas de hospedagens para cães e gatos
+# Hospet — reservas de hospedagens para cães e gatos
 MiAuspedagem é uma aplicação web interativa desenvolvida para facilitar e organizar a reserva de hospedagens para animais de estimação. A plataforma conta com um fluxo contínuo (Single Page Application), permitindo ao tutor navegar entre o agendamento, formulário de dados com consulta automática de CEP e receber a confirmação do agendamento via WhatsApp - após enviar sua solicitação
 
 # Funcionalidades
@@ -23,7 +23,7 @@ JavaScript: Lógica do calendário, controle de estados, manipulação de evento
 ViaCEP Webservice: API para busca e validação de CEP em tempo real.
 
 # Estrutura do Projeto
-MiAuspedagem/
+Hospet/
 README.md         Documentação e apresentação do projeto.
 LICENSE           Licença de uso e distribuição (MIT License).
 hospet.html       Arquivo HTML principal e telas da aplicação.

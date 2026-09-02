@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HosPet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TELA 1: Principal -->
+    <main class="container" id="mainContainer">
+        <header class="header">
+            <h1 class="title">MiAuspedagem</h1>
+            <p class="subtitle">reservas de hospedagens para cães e gatos</p>
+        </header>
+
+        <div class="pet-wrapper">
+            <button id="btnDalmata" class="image-button" aria-label="Solicitar Reserva">
+                <img src="doggy.jpeg" alt="Cãozinho segurando a placa Solicitar Reserva" class="pet-image">
+            </button>
+        </div>
+
+    </main>
+
+    <!-- TELA 2: Calendário de Reservas -->
+    <section class="calendar-screen hidden" id="calendarScreen">
+        <div class="calendar-card">
+            <h2 class="calendar-title">Calendário de Reservas</h2>
+
+            <!-- Seletor de Mês e Ano -->
+            <div class="calendar-header-nav">
+                <button id="btnPrevMonth" class="nav-month-btn">&lt;</button>
+                <span id="monthYearTitle" class="month-year-title">Setembro 2026</span>
+                <button id="btnNextMonth" class="nav-month-btn">&gt;</button>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <span class="day-header">D</span>
+                <span class="day-header">S</span>
+                <span class="day-header">T</span>
+                <span class="day-header">Q</span>
+                <span class="day-header">Q</span>
+                <span class="day-header">S</span>
+                <span class="day-header">S</span>
+
+                <!-- Os dias e espaçadores serão inseridos via JavaScript -->
+            </div>
+
+            <div class="calendar-legend">
+                <div class="legend-item"><span class="dot green"></span> Disponível</div>
+                <div class="legend-item"><span class="dot red"></span> Reservado</div>
+            </div>
+
+            <button id="btnVoltarInicio" class="back-button">← Voltar</button>
+        </div>
+    </section>
+
+    <!-- TELA 3: Formulário de Solicitação -->
+    <section class="form-screen hidden" id="formScreen">
+        <div class="form-card">
+            <h2 class="form-title">FORMULÁRIO DE SOLICITAÇÃO</h2>
+            <p id="selectedDateText" class="selected-date-display"></p>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="tutorName">Nome do Tutor</label>
+                    <input type="text" id="tutorName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tutorPhone">Telefone (com DDD)</label>
+                    <input type="tel" id="tutorPhone" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tutorEmail">E-mail</label>
+                    <input type="email" id="tutorEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tutorCep">CEP</label>
+                    <input type="text" id="tutorCep" maxlength="9" placeholder="00000-000" required>
+                    <small id="cepError" class="cep-error hidden">CEP não encontrado</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="tutorAddress">Endereço</label>
+                    <input type="text" id="tutorAddress" readonly class="readonly-input"
+                        placeholder="Preenchido via CEP">
+                </div>
+
+                <div class="form-group">
+                    <label for="tutorDetails">OUTROS DETALHES</label>
+                    <textarea id="tutorDetails" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">ENVIAR SOLICITAÇÃO</button>
+            </form>
+            <button id="btnVoltarCalendar" class="back-button">← Escolher outra data</button>
+        </div>
+    </section>
+
+    <!-- TELA 4: Sucesso -->
+    <section class="success-screen hidden" id="successScreen">
+        <div class="success-card">
+            <h2 class="success-title">SOLICITAÇÃO ENVIADA COM SUCESSO</h2>
+            <div class="check-icon">✓</div>
+            <p class="success-msg">Aguarde o retorno!</p>
+
+            <a href="https://wa.me/5500000000000" id="whatsappBtn" target="_blank" class="whatsapp-button">
+                <span class="wa-icon">💬</span> CONTATO NO WHATSAPP
+            </a>
+
+            <button id="btnNovoAgendamento" class="back-button">Início</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

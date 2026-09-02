@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5eedc;
+    /* Padrão repetido com ícones de patinhas de cães e gatos em tom suave */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23d1c4a5' fill-opacity='0.45'%3E%3C!-- Patinha 1 --%3E%3Cpath d='M20 28c-1.7 0-3 1.8-3 4s1.3 4 3 4 3-1.8 3-4-1.3-4-3-4zm-7 5c-1.4 0-2.5 1.6-2.5 3.5S11.6 40 13 40s2.5-1.6 2.5-3.5S14.4 33 13 33zm14 0c-1.4 0-2.5 1.6-2.5 3.5s1.1 3.5 2.5 3.5 2.5-1.6 2.5-3.5-1.1-3.5-2.5-3.5zm-7 5c-3.9 0-7 2.7-7 6 0 2.2 2.1 4 7 4s7-1.8 7-4c0-3.3-3.1-6-7-6z'/%3E%3C!-- Patinha 2 (rotacionada/menor) --%3E%3Cpath d='M60 60c-1.4 0-2.5 1.5-2.5 3.3s1.1 3.3 2.5 3.3 2.5-1.5 2.5-3.3-1.1-3.3-2.5-3.3zm-6 4c-1.1 0-2 1.3-2 3s.9 3 2 3 2-1.3 2-3-.9-3-2-3zm12 0c-1.1 0-2 1.3-2 3s.9 3 2 3 2-1.3 2-3-.9-3-2-3zm-6 4c-3.2 0-5.8 2.2-5.8 5 0 1.8 1.7 3.3 5.8 3.3s5.8-1.5 5.8-3.3c0-2.8-2.6-5-5.8-5z'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 90px 90px;
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* TELA PRINCIPAL */
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    margin-top: 0;
+    margin-bottom: 80px;
+    /* Distância maior entre o subtítulo e o cãozinho */
+}
+
+.title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 4.5rem;
+    color: #3b2314;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #3b2314;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.subtitle::before {
+    content: "🐾 ";
+    margin-right: 5px;
+}
+
+.subtitle::after {
+    content: " 🐾";
+    margin-left: 5px;
+}
+
+.pet-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.image-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+}
+
+.pet-image {
+    transition: transform 0.3s ease;
+    /* Transição levemente mais suave */
+}
+
+.pet-image:hover {
+    transform: scale(1.08);
+    /* Aumenta o nível de zoom */
+}
+
+/* TELA DO CALENDÁRIO */
+.calendar-screen,
+.form-screen,
+.success-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.calendar-card,
+.form-card,
+.success-card {
+    background-color: #f9f4e8;
+    border: 2px solid #3b2314;
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.calendar-title,
+.form-title {
+    font-family: 'Quicksand', sans-serif;
+    color: #2b170c;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.calendar-header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    border: 2px solid #3b2314;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+.month-year-title {
+    font-weight: 700;
+    color: #2b170c;
+    font-size: 1.05rem;
+    text-transform: capitalize;
+}
+
+.nav-month-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3b2314;
+    cursor: pointer;
+    padding: 0 8px;
+}
+
+.calendar-grid {
+    background-color: #ffffff;
+    border: 2px solid #3b2314;
+    border-radius: 10px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.day-header {
+    font-weight: 700;
+    color: #000;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.day {
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0 auto;
+}
+
+.day.available {
+    background-color: #72c186;
+    color: #1a4d25;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.day.available:hover {
+    transform: scale(1.1);
+}
+
+.day.reserved {
+    background-color: #f05a5b;
+    color: #5c1112;
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.calendar-legend {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    font-weight: 700;
+    color: #2b170c;
+    font-size: 0.95rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.green {
+    background-color: #72c186;
+}
+
+.dot.red {
+    background-color: #f05a5b;
+}
+
+/* FORMULÁRIO */
+.selected-date-display {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #3b8754;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2b170c;
+    margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group textarea {
+    border: 2px solid #3b2314;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background-color: #fff;
+    outline: none;
+}
+
+.form-group input.readonly-input {
+    background-color: #eee8d5;
+    color: #655147;
+}
+
+.cep-error {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    margin-top: 2px;
+    font-weight: 700;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #3b8754;
+    color: #ffffff;
+    border: 2px solid #285e3a;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #2e6d43;
+}
+
+/* SUCESSO */
+.success-card {
+    text-align: center;
+}
+
+.success-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2b170c;
+    margin-bottom: 15px;
+}
+
+.check-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #5bbd76;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin: 0 auto 15px auto;
+}
+
+.success-msg {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.whatsapp-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #ffffff;
+    border: 2px solid #3b2314;
+    border-radius: 8px;
+    padding: 10px;
+    color: #3b2314;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    margin-top: 15px;
+    background: none;
+    border: none;
+    color: #3b2314;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: block;
+    width: 100%;
+}

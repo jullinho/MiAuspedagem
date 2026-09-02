@@ -1,5 +1,5 @@
 # Hospet — reservas de hospedagens para cães e gatos
-MiAuspedagem é uma aplicação web interativa desenvolvida para facilitar e organizar a reserva de hospedagens para animais de estimação. A plataforma conta com um fluxo contínuo (Single Page Application), permitindo ao tutor navegar entre o agendamento, formulário de dados com consulta automática de CEP e receber a confirmação do agendamento via WhatsApp - após enviar sua solicitação
+Hospet é uma aplicação web interativa desenvolvida para facilitar e organizar a reserva de hospedagens para animais de estimação. A plataforma conta com um fluxo contínuo (Single Page Application), permitindo ao tutor navegar entre o agendamento, formulário de dados com consulta automática de CEP e receber a confirmação do agendamento via WhatsApp - após enviar sua solicitação
 
 # Funcionalidades
 Navegação Dinâmica: 

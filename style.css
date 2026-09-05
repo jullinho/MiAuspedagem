@@ -58,17 +58,15 @@ body {
     text-align: center;
     width: 100%;
     min-height: calc(100vh - 80px);
-    /* Ocupa a altura da tela descontando a barra superior */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Centraliza o conteúdo verticalmente */
     padding: 20px 0;
 }
 
 .header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .title {
@@ -80,7 +78,7 @@ body {
 
 .subtitle {
     font-size: 1.2rem;
-    color: #145307;
+    color: #092903;
     font-weight: 500;
     margin-top: 5px;
 }
@@ -116,6 +114,31 @@ body {
     transform: scale(1.08);
 }
 
+/* SEÇÃO SAIBA MAIS DA PRINCIPAL */
+.saiba-mais-container {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: #3b2314;
+    font-weight: 500;
+}
+
+.btn-saiba-mais {
+    background: none;
+    border: none;
+    color: #70472d;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    margin-left: 5px;
+}
+
+.btn-saiba-mais:hover {
+    color: #3b8754;
+}
+
 /* CARDS DO CLIENTE */
 .calendar-screen,
 .form-screen,
@@ -124,7 +147,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: calc(100vh - 40px); /* Garante altura total da tela descontando paddings */
+    min-height: calc(100vh - 40px);
     padding: 20px 0;
 }
 
@@ -213,7 +236,7 @@ body {
 
 .day.available {
     background-color: #72c186;
-    color: #1a4d25;
+    color: #4d411a;
     cursor: pointer;
     transition: transform 0.1s ease;
 }
@@ -259,7 +282,7 @@ body {
     background-color: #f05a5b;
 }
 
-/* FORMULÁRIOS & MODAL DE LOGIN */
+/* FORMULÁRIOS & MODAIS */
 .selected-date-display {
     font-size: 0.95rem;
     font-weight: 700;
@@ -324,7 +347,7 @@ body {
     background-color: #2e6d43;
 }
 
-/* MODAL SOBREPOSTO DE LOGIN */
+/* MODAL OVERLAY */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -339,6 +362,66 @@ body {
     padding: 20px;
 }
 
+/* MODAL SOBRE (SAIBA MAIS) */
+.modal-sobre-card {
+    background-color: #f9f4e8;
+    border: 2px solid #3b2314;
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    color: #2b170c;
+    text-align: left;
+}
+
+.modal-sobre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d1c4a5;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-sobre-header h3 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.3rem;
+    color: #2b170c;
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3b2314;
+    cursor: pointer;
+}
+
+.modal-sobre-body p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.modal-sobre-body ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-sobre-body li {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.modal-sobre-footer {
+    border-top: 1px solid #d1c4a5;
+    padding-top: 12px;
+}
+
+/* SUCESSO & VOLTAR */
 .success-card {
     text-align: center;
 }

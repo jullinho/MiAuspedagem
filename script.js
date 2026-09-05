@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNextMonth = document.getElementById('btnNextMonth');
     const calendarGrid = document.getElementById('calendarGrid');
 
-    const btnReserva = document.getElementById('btnReserva');
+    const btnDalmata = document.getElementById('btnDalmata');
     const btnVoltarInicio = document.getElementById('btnVoltarInicio');
     const btnVoltarCalendar = document.getElementById('btnVoltarCalendar');
     const btnNovoAgendamento = document.getElementById('btnNovoAgendamento');
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar();
     });
 
-   btnReserva.addEventListener('click', () => {
+    btnDalmata.addEventListener('click', () => {
         mainContainer.classList.add('hidden');
         calendarScreen.classList.remove('hidden');
         renderCalendar();

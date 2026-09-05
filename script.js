@@ -15,32 +15,67 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginError = document.getElementById('loginError');
     const btnLogout = document.getElementById('btnLogout');
 
-    btnAbrirLogin.addEventListener('click', () => {
-        adminPassword.value = '';
-        loginError.classList.add('hidden');
-        modalLogin.classList.remove('hidden');
-    });
+    if (btnAbrirLogin) {
+        btnAbrirLogin.addEventListener('click', () => {
+            adminPassword.value = '';
+            loginError.classList.add('hidden');
+            modalLogin.classList.remove('hidden');
+        });
+    }
 
-    btnCancelarLogin.addEventListener('click', () => {
-        modalLogin.classList.add('hidden');
-    });
-
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (adminPassword.value === ADMIN_PASSWORD) {
+    if (btnCancelarLogin) {
+        btnCancelarLogin.addEventListener('click', () => {
             modalLogin.classList.add('hidden');
-            viewCliente.classList.add('hidden');
-            viewDono.classList.remove('hidden');
-            renderBookings();
-        } else {
-            loginError.classList.remove('hidden');
-        }
-    });
+        });
+    }
 
-    btnLogout.addEventListener('click', () => {
-        viewDono.classList.add('hidden');
-        viewCliente.classList.remove('hidden');
-    });
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (adminPassword.value === ADMIN_PASSWORD) {
+                modalLogin.classList.add('hidden');
+                viewCliente.classList.add('hidden');
+                viewDono.classList.remove('hidden');
+                renderBookings();
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+    }
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            viewDono.classList.add('hidden');
+            viewCliente.classList.remove('hidden');
+        });
+    }
+
+    // --- CONTROLE DO MODAL SAIBA MAIS ---
+    const modalSobre = document.getElementById('modalSobre');
+    const btnAbrirSobre = document.getElementById('btnAbrirSobre');
+    const btnFecharSobre = document.getElementById('btnFecharSobre');
+    const btnEntendidoSobre = document.getElementById('btnEntendidoSobre');
+
+    if (btnAbrirSobre && modalSobre) {
+        btnAbrirSobre.addEventListener('click', () => {
+            modalSobre.classList.remove('hidden');
+        });
+    }
+
+    const fecharModalSobre = () => {
+        if (modalSobre) modalSobre.classList.add('hidden');
+    };
+
+    if (btnFecharSobre) btnFecharSobre.addEventListener('click', fecharModalSobre);
+    if (btnEntendidoSobre) btnEntendidoSobre.addEventListener('click', fecharModalSobre);
+
+    if (modalSobre) {
+        modalSobre.addEventListener('click', (e) => {
+            if (e.target === modalSobre) {
+                fecharModalSobre();
+            }
+        });
+    }
 
     // --- LÓGICA DO CLIENTE ---
     const mainContainer = document.getElementById('mainContainer');
@@ -72,12 +107,31 @@ document.addEventListener('DOMContentLoaded', () => {
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
     ];
 
+    function getStoredBookings() {
+        try {
+            return JSON.parse(localStorage.getItem('miauspedagem_bookings')) || [];
+        } catch (e) {
+            console.warn('Armazenamento local indisponível ou bloqueado:', e);
+            return [];
+        }
+    }
+
+    function saveStoredBookings(data) {
+        try {
+            localStorage.setItem('miauspedagem_bookings', JSON.stringify(data));
+        } catch (e) {
+            console.error('Não foi possível salvar no localStorage:', e);
+        }
+    }
+
     function getReservedDates() {
-        const bookings = JSON.parse(localStorage.getItem('miauspedagem_bookings')) || [];
+        const bookings = getStoredBookings();
         return new Set(bookings.map(b => b.date));
     }
 
     function renderCalendar() {
+        if (!calendarGrid || !monthYearTitle) return;
+
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
 
@@ -118,101 +172,124 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    btnPrevMonth.addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-    });
+    if (btnPrevMonth) {
+        btnPrevMonth.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+    }
 
-    btnNextMonth.addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-    });
+    if (btnNextMonth) {
+        btnNextMonth.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+    }
 
-    btnDalmata.addEventListener('click', () => {
-        mainContainer.classList.add('hidden');
-        calendarScreen.classList.remove('hidden');
-        renderCalendar();
-    });
+    if (btnDalmata) {
+        btnDalmata.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (mainContainer && calendarScreen) {
+                mainContainer.classList.add('hidden');
+                calendarScreen.classList.remove('hidden');
+                renderCalendar();
+            }
+        });
+    }
 
-    btnVoltarInicio.addEventListener('click', () => {
-        calendarScreen.classList.add('hidden');
-        mainContainer.classList.remove('hidden');
-    });
-
-    calendarGrid.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target.classList.contains('day') && target.classList.contains('available')) {
-            selectedDateString = target.dataset.date;
-            const [y, m, d] = selectedDateString.split('-');
-            selectedDateText.innerText = `Data Selecionada: ${d}/${m}/${y}`;
-
+    if (btnVoltarInicio) {
+        btnVoltarInicio.addEventListener('click', () => {
             calendarScreen.classList.add('hidden');
-            formScreen.classList.remove('hidden');
-        }
-    });
+            mainContainer.classList.remove('hidden');
+        });
+    }
 
-    btnVoltarCalendar.addEventListener('click', () => {
-        formScreen.classList.add('hidden');
-        calendarScreen.classList.remove('hidden');
-    });
+    if (calendarGrid) {
+        calendarGrid.addEventListener('click', (e) => {
+            const target = e.target;
+            if (target.classList.contains('day') && target.classList.contains('available')) {
+                selectedDateString = target.dataset.date;
+                const [y, m, d] = selectedDateString.split('-');
+                if (selectedDateText) {
+                    selectedDateText.innerText = `Data Selecionada: ${d}/${m}/${y}`;
+                }
 
-    // Busca CEP (ViaCEP API)
-    cepInput.addEventListener('blur', () => {
-        const cep = cepInput.value.replace(/\D/g, '');
-        if (cep.length === 8) {
-            fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                .then(res => res.json())
-                .then(data => {
-                    if (!data.erro) {
-                        addressInput.value = `${data.logradouro}, ${data.bairro} - ${data.localidade}/${data.uf}`;
-                        cepError.classList.add('hidden');
-                    } else {
-                        cepError.classList.remove('hidden');
-                        addressInput.value = '';
-                    }
-                })
-                .catch(() => {
-                    cepError.classList.remove('hidden');
-                });
-        }
-    });
+                calendarScreen.classList.add('hidden');
+                formScreen.classList.remove('hidden');
+            }
+        });
+    }
 
-    // Enviar solicitação
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+    if (btnVoltarCalendar) {
+        btnVoltarCalendar.addEventListener('click', () => {
+            formScreen.classList.add('hidden');
+            calendarScreen.classList.remove('hidden');
+        });
+    }
 
-        const newBooking = {
-            id: Date.now(),
-            date: selectedDateString,
-            tutorName: document.getElementById('tutorName').value,
-            tutorPhone: document.getElementById('tutorPhone').value,
-            tutorEmail: document.getElementById('tutorEmail').value,
-            tutorAddress: addressInput.value,
-            tutorDetails: document.getElementById('tutorDetails').value,
-            status: 'pendente'
-        };
+    if (cepInput) {
+        cepInput.addEventListener('blur', () => {
+            const cep = cepInput.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            if (addressInput) addressInput.value = `${data.logradouro}, ${data.bairro} - ${data.localidade}/${data.uf}`;
+                            if (cepError) cepError.classList.add('hidden');
+                        } else {
+                            if (cepError) cepError.classList.remove('hidden');
+                            if (addressInput) addressInput.value = '';
+                        }
+                    })
+                    .catch(() => {
+                        if (cepError) cepError.classList.remove('hidden');
+                    });
+            }
+        });
+    }
 
-        const savedBookings = JSON.parse(localStorage.getItem('miauspedagem_bookings')) || [];
-        savedBookings.push(newBooking);
-        localStorage.setItem('miauspedagem_bookings', JSON.stringify(savedBookings));
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        formScreen.classList.add('hidden');
-        successScreen.classList.remove('hidden');
+            const newBooking = {
+                id: Date.now(),
+                date: selectedDateString,
+                tutorName: document.getElementById('tutorName')?.value || '',
+                tutorPhone: document.getElementById('tutorPhone')?.value || '',
+                tutorEmail: document.getElementById('tutorEmail')?.value || '',
+                tutorAddress: addressInput?.value || '',
+                tutorDetails: document.getElementById('tutorDetails')?.value || '',
+                status: 'pendente'
+            };
 
-        bookingForm.reset();
-        addressInput.value = '';
-    });
+            const savedBookings = getStoredBookings();
+            savedBookings.push(newBooking);
+            saveStoredBookings(savedBookings);
 
-    btnNovoAgendamento.addEventListener('click', () => {
-        successScreen.classList.add('hidden');
-        mainContainer.classList.remove('hidden');
-    });
+            formScreen.classList.add('hidden');
+            successScreen.classList.remove('hidden');
+
+            bookingForm.reset();
+            if (addressInput) addressInput.value = '';
+        });
+    }
+
+    if (btnNovoAgendamento) {
+        btnNovoAgendamento.addEventListener('click', () => {
+            successScreen.classList.add('hidden');
+            mainContainer.classList.remove('hidden');
+        });
+    }
 
     // --- LÓGICA DO PROPRIETÁRIO ---
     const bookingList = document.getElementById('bookingList');
 
     function renderBookings() {
-        const bookings = JSON.parse(localStorage.getItem('miauspedagem_bookings')) || [];
+        if (!bookingList) return;
+
+        const bookings = getStoredBookings();
 
         if (bookings.length === 0) {
             bookingList.innerHTML = '<div class="empty-msg">Nenhuma solicitação de reserva cadastrada no momento.</div>';
@@ -224,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bookings.forEach((item) => {
             const cleanPhone = item.tutorPhone.replace(/\D/g, '');
-            const [y, m, d] = item.date.split('-');
-            const formattedDate = `${d}/${m}/${y}`;
+            const [y, m, d] = item.date ? item.date.split('-') : ['', '', ''];
+            const formattedDate = item.date ? `${d}/${m}/${y}` : 'Data não informada';
 
             const message = encodeURIComponent(
                 `Olá ${item.tutorName}! Recebemos a sua solicitação de hospedagem na MiAuspedagem para a data ${formattedDate}. Gostaria de confirmar os detalhes do seu pet para finalizar a reserva!`
@@ -257,22 +334,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.confirmBooking = function (id) {
-        let bookings = JSON.parse(localStorage.getItem('miauspedagem_bookings')) || [];
+        let bookings = getStoredBookings();
         bookings = bookings.map(item => {
             if (item.id === id) {
                 item.status = 'confirmado';
             }
             return item;
         });
-        localStorage.setItem('miauspedagem_bookings', JSON.stringify(bookings));
+        saveStoredBookings(bookings);
         renderBookings();
     };
 
     window.deleteBooking = function (id) {
         if (confirm("Tem certeza que deseja excluir esta solicitação?")) {
-            let bookings = JSON.parse(localStorage.getItem('miauspedagem_bookings')) || [];
+            let bookings = getStoredBookings();
             bookings = bookings.filter(item => item.id !== id);
-            localStorage.setItem('miauspedagem_bookings', JSON.stringify(bookings));
+            saveStoredBookings(bookings);
             renderBookings();
         }
     };

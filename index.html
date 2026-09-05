@@ -33,6 +33,12 @@
                     <img src="doggy.jpeg" alt="Cãozinho segurando a placa Solicitar Reserva" class="pet-image">
                 </button>
             </div>
+
+            <!-- LINK SAIBA MAIS -->
+            <div class="saiba-mais-container">
+                <span>Saiba mais sobre o MiAuspedagem!</span>
+                <button id="btnAbrirSobre" class="btn-saiba-mais">Clique aqui!</button>
+            </div>
         </main>
 
         <!-- TELA 2: Calendário de Reservas -->
@@ -135,6 +141,27 @@
                 <button type="submit" class="submit-button">ENTRAR</button>
             </form>
             <button id="btnCancelarLogin" class="back-button">← Cancelar</button>
+        </div>
+    </div>
+
+    <!-- MODAL SOBRE O MIAUSPEDAGEM (SAIBA MAIS) -->
+    <div id="modalSobre" class="modal-overlay hidden">
+        <div class="modal-sobre-card">
+            <div class="modal-sobre-header">
+                <h3>Sobre o MiAuspedagem</h3>
+                <button id="btnFecharSobre" class="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-sobre-body">
+                <p>O MiAuspedagem foi projetado para ser rápido e direto na reserva de hospedagens para seus animais de estimação:</p>
+                <ul>
+                    <li>Ao clicar no cãozinho, você visualiza em tempo real as datas disponíveis (em verde) e reservadas (em vermelho) no calendário.</li>
+                    <li>Ao informar seu CEP, o sistema preenche o endereço automaticamente para agilizar a sua solicitação.</li>
+                    <li>Após o envio dos dados do tutor e do pet, o estabelecimento entrará em contato direto pelo WhatsApp para confirmar a reserva.</li>
+                </ul>
+            </div>
+            <div class="modal-sobre-footer">
+                <button id="btnEntendidoSobre" class="submit-button">Entendido!</button>
+            </div>
         </div>
     </div>
 
